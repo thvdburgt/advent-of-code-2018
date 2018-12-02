@@ -1,0 +1,6 @@
+[package]
+name = "advent-of-code-2018-day-2"
+version = "0.1.0"
+authors = ["Thomas van der Burgt <thomas@thvdburgt.nl>"]
+
+[dependencies]

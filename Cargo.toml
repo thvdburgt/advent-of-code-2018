@@ -1,5 +1,5 @@
 [workspace]
 members = [
     "day-1-chronal-calibration",
-    "day-1-chronal-calibration",
+    "day-2-inventory-management-system",
 ]
