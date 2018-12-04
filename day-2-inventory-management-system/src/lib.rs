@@ -55,7 +55,7 @@ pub fn solve_puzzle_part_2(input: &str) -> Option<String> {
             } else {
                 // found two ids with a single difference,
                 // create a string by removing the differing character
-                let s  = id1
+                let s = id1
                     .chars()
                     .zip(id2.chars())
                     .filter_map(|(c1, c2)| if c1 == c2 { Some(c1) } else { None })

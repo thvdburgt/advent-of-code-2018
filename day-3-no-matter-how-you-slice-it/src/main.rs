@@ -6,9 +6,8 @@ extern crate advent_of_code_2018_day_3 as advent;
 fn main() {
     let mut file = File::open("input").expect("Could not open input");
     let mut input = String::new();
-    file.read_to_string(&mut input).expect(
-        "Could not read input",
-    );
+    file.read_to_string(&mut input)
+        .expect("Could not read input");
 
     let input = input.trim();
     println!(
