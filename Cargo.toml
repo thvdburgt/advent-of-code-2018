@@ -3,4 +3,5 @@ members = [
     "day-1-chronal-calibration",
     "day-2-inventory-management-system",
     "day-3-no-matter-how-you-slice-it",
+    "day-4-repose-record",
 ]
