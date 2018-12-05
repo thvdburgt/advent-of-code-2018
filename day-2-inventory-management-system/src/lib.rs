@@ -65,5 +65,5 @@ pub fn solve_puzzle_part_2(input: &str) -> Option<String> {
         }
     }
 
-    return None;
+    None
 }
