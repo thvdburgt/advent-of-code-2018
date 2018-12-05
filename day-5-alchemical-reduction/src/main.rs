@@ -1,21 +1,19 @@
-use std::fs::File;
-use std::io::prelude::*;
+use std::io::{self, Read};
 
 extern crate advent_of_code_2018_day_5 as advent;
 
-fn main() {
-    let mut file = File::open("input").expect("Could not open input");
+fn main() -> io::Result<()> {
+    // read input
     let mut input = String::new();
-    file.read_to_string(&mut input)
-        .expect("Could not read input");
-
+    io::stdin().read_to_string(&mut input)?;
     let input = input.trim();
-    println!(
-        "the answer for part 1 is {}",
-        advent::solve_puzzle_part_1(input)
-    );
-    println!(
-        "the answer for part 2 is {}",
-        advent::solve_puzzle_part_2(input)
-    );
+
+    // solve the puzzles
+    let part_1_answer = advent::solve_puzzle_part_1(input);
+    println!("the answer for part 1 is {}", part_1_answer);
+
+    let part_2_answer = advent::solve_puzzle_part_2(input);
+    println!("the answer for part 2 is {}", part_2_answer);
+
+    Ok(())
 }
