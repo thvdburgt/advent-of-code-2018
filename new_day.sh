@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+readonly YEAR=2018
+
 function usage {
 	echo "Usage: $0 [DAYNR] [DAYTITLE]"
 	exit 1
@@ -29,6 +31,8 @@ DIR=day-$1-$(echo "$2" | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | cat)
 # Copy template to directory
 cp -r template "$DIR"
 
+# Convert occurances of 20xx correct year
+fd -t f -x sed -i "s/20xx/$YEAR/g" "{}" \; ".*" "$DIR"
 # Convert occurances of day-x and day_x to correct day
 fd -t f -x sed -i "s/day\(-\|_\)x/day\1$1/g" "{}" \; ".*" "$DIR"
 

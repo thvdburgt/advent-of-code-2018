@@ -1,11 +1,13 @@
-use std::io::{self, Read};
+extern crate advent_of_code_20xx_day_x as advent;
 
-extern crate advent_of_code_2018_day_x as advent;
+fn main() -> std::io::Result<()> {
+    // determine input filepath
+    let input_path = std::env::args()
+        .nth(1)
+        .unwrap_or_else(|| "input".to_string());
 
-fn main() -> io::Result<()> {
     // read input
-    let mut input = String::new();
-    io::stdin().read_to_string(&mut input)?;
+    let input = std::fs::read_to_string(input_path)?;
     let input = input.trim();
 
     // solve the puzzles
