@@ -3,9 +3,9 @@ use std::str::FromStr;
 
 #[derive(PartialEq, Eq, PartialOrd, Ord)]
 pub struct Date {
-    year: u32,
-    month: u32,
-    day: u32,
+    year: u16,
+    month: u8,
+    day: u8,
 }
 impl fmt::Display for Date {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -36,8 +36,8 @@ impl FromStr for Date {
 
 #[derive(PartialEq, Eq, PartialOrd, Ord)]
 pub struct Time {
-    pub hour: u32,
-    pub minute: u32,
+    pub hour: u8,
+    pub minute: u8,
 }
 
 impl fmt::Display for Time {
