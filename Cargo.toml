@@ -5,4 +5,5 @@ members = [
     "day-3-no-matter-how-you-slice-it",
     "day-4-repose-record",
     "day-5-alchemical-reduction",
+    "day-6-chronal-coordinates",
 ]
