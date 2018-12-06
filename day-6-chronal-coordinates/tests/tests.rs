@@ -14,8 +14,3 @@ const SAMPLE_INPUT: &str = "\
 fn part_1_example() {
     assert_eq!(solve_puzzle_part_1(SAMPLE_INPUT), 17);
 }
-
-#[test]
-fn part_2_example() {
-    assert_eq!(solve_puzzle_part_2(SAMPLE_INPUT, 32), 16);
-}

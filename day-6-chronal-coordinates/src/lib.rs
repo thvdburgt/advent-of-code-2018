@@ -5,8 +5,7 @@ fn parse_coordinates(s: &str) -> Vec<(usize, usize)> {
             let x = c.next().unwrap().parse().unwrap();
             let y = c.next().unwrap().parse().unwrap();
             (x, y)
-        })
-        .collect()
+        }).collect()
 }
 
 fn manhattan_distance(a: (usize, usize), b: (usize, usize)) -> usize {
@@ -83,8 +82,7 @@ pub fn solve_puzzle_part_1(input: &str) -> usize {
                 }
             }
             count
-        })
-        .max()
+        }).max()
         .unwrap()
 }
 
@@ -100,9 +98,7 @@ fn sum_distances_less_than(
     sum_distances < total
 }
 
-pub fn solve_puzzle_part_2(input: &str, less_than_distance: usize) -> usize {
-    let coords = parse_coordinates(input);
-
+fn size_of_region_distance_less_than(coords: &[(usize, usize)], distance: usize) -> usize {
     let mut grid = {
         let (max_x, max_y) = coords.iter().fold((0, 0), |(max_x, max_y), (x, y)| {
             (std::cmp::max(max_x, *x), std::cmp::max(max_y, *y))
@@ -113,7 +109,7 @@ pub fn solve_puzzle_part_2(input: &str, less_than_distance: usize) -> usize {
 
     for (y, row) in grid.iter_mut().enumerate() {
         for (x, pos) in row.iter_mut().enumerate() {
-            *pos = if sum_distances_less_than((x, y), &coords, less_than_distance) {
+            *pos = if sum_distances_less_than((x, y), &coords, distance) {
                 1
             } else {
                 0
@@ -122,4 +118,25 @@ pub fn solve_puzzle_part_2(input: &str, less_than_distance: usize) -> usize {
     }
 
     grid.iter().map(|row| row.iter().sum::<usize>()).sum()
+}
+
+pub fn solve_puzzle_part_2(input: &str) -> usize {
+    let coords = parse_coordinates(input);
+
+    size_of_region_distance_less_than(&coords, 10000)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    const SAMPLE_INPUT: &str = "1, 1\n1, 6\n8, 3\n3, 4\n5, 5\n8, 9";
+
+    #[test]
+    fn it_works() {
+        assert_eq!(
+            size_of_region_distance_less_than(&parse_coordinates(SAMPLE_INPUT), 32),
+            16
+        );
+    }
 }
