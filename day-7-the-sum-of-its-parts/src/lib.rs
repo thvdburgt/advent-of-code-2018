@@ -20,7 +20,10 @@ fn read_instructions(instructions: &str) -> (BinaryHeap<Step>, HashMap<Step, Has
 
     // create mapping of steps to its requirements
     for instruction in instructions {
-        nodes.entry(instruction.step).or_default().insert(instruction.requirement);
+        nodes
+            .entry(instruction.step)
+            .or_default()
+            .insert(instruction.requirement);
         reqs.insert(Step(instruction.requirement));
     }
 
@@ -45,7 +48,8 @@ pub fn solve_puzzle_part_1(input: &str) -> String {
         // we have finished step
         done.push(step);
         // add all steps to the heap whose requirement are now met
-        nodes.iter()
+        nodes
+            .iter()
             .filter(|(_, reqs)| reqs.contains(&step))
             .filter(|(_, reqs)| reqs.iter().all(|req| done.contains(req)))
             .for_each(|(&s, _)| heap.push(s));
@@ -77,7 +81,8 @@ fn assemble_sleigh(input: &str, base_duration: usize, nr_of_elves: usize) -> usi
                 // we have finished step
                 done.push(step);
                 // add all steps to the heap whose requirement are now met
-                nodes.iter()
+                nodes
+                    .iter()
                     .filter(|(_, reqs)| reqs.contains(&step))
                     .filter(|(_, reqs)| reqs.iter().all(|req| done.contains(req)))
                     .for_each(|(&s, _)| heap.push(s));
