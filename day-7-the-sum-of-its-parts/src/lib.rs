@@ -15,20 +15,17 @@ fn read_instructions(instructions: &str) -> (BinaryHeap<Step>, HashMap<Step, Has
         .map(|line| line.parse().unwrap())
         .collect();
 
-    let mut nodes = HashMap::new();
-    let mut steps = HashSet::new();
+    let mut nodes: HashMap<Step, HashSet<char>> = HashMap::new();
+    let mut reqs = HashSet::new();
 
     // create mapping of steps to its requirements
     for instruction in instructions {
-        let requirements: &mut HashSet<_> = nodes.entry(instruction.step).or_default();
-        requirements.insert(instruction.requirement);
-
-        steps.insert(instruction.step);
-        steps.insert(Step(instruction.requirement));
+        nodes.entry(instruction.step).or_default().insert(instruction.requirement);
+        reqs.insert(Step(instruction.requirement));
     }
 
-    // create heap with steps without requirements
-    let heap = steps
+    // create heap of steps without requirements
+    let heap = reqs
         .into_iter()
         .filter(|step| !nodes.contains_key(step))
         .collect();
@@ -45,12 +42,13 @@ pub fn solve_puzzle_part_1(input: &str) -> String {
     // do all steps in correct order
     let mut done: Vec<char> = Vec::new();
     while let Some(Step(step)) = heap.pop() {
+        // we have finished step
         done.push(step);
-        for (other_step, reqs) in &nodes {
-            if reqs.contains(&step) && reqs.iter().all(|req| done.contains(req)) {
-                heap.push(*other_step);
-            }
-        }
+        // add all steps to the heap whose requirement are now met
+        nodes.iter()
+            .filter(|(_, reqs)| reqs.contains(&step))
+            .filter(|(_, reqs)| reqs.iter().all(|req| done.contains(req)))
+            .for_each(|(&s, _)| heap.push(s));
     }
 
     done.iter().collect()
@@ -76,12 +74,13 @@ fn assemble_sleigh(input: &str, base_duration: usize, nr_of_elves: usize) -> usi
         // make the workers work and get the result if they're done
         for worker in &mut workers {
             if let Some(Step(step)) = worker.tick() {
+                // we have finished step
                 done.push(step);
-                for (other_step, reqs) in &nodes {
-                    if reqs.contains(&step) && reqs.iter().all(|req| done.contains(req)) {
-                        heap.push(*other_step);
-                    }
-                }
+                // add all steps to the heap whose requirement are now met
+                nodes.iter()
+                    .filter(|(_, reqs)| reqs.contains(&step))
+                    .filter(|(_, reqs)| reqs.iter().all(|req| done.contains(req)))
+                    .for_each(|(&s, _)| heap.push(s));
             }
         }
 
