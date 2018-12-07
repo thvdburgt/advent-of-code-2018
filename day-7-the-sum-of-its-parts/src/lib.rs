@@ -28,11 +28,10 @@ fn read_instructions(instructions: &str) -> (BinaryHeap<Step>, HashMap<Step, Has
     }
 
     // create heap with steps without requirements
-    let mut heap: BinaryHeap<Step> = BinaryHeap::new();
-    steps
-        .iter()
+    let heap = steps
+        .into_iter()
         .filter(|step| !nodes.contains_key(step))
-        .for_each(|step| heap.push(*step));
+        .collect();
 
     // return both
     (heap, nodes)
