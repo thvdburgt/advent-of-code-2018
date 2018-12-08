@@ -7,4 +7,5 @@ members = [
     "day-5-alchemical-reduction",
     "day-6-chronal-coordinates",
     "day-7-the-sum-of-its-parts",
+    "day-8-memory-maneuver",
 ]
