@@ -8,4 +8,5 @@ members = [
     "day-6-chronal-coordinates",
     "day-7-the-sum-of-its-parts",
     "day-8-memory-maneuver",
+    "day-9-marble-mania",
 ]
