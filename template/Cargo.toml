@@ -2,5 +2,6 @@
 name = "advent-of-code-20xx-day-x"
 version = "0.1.0"
 authors = ["Thomas van der Burgt <thomas@thvdburgt.nl>"]
+edition = "2018"
 
 [dependencies]

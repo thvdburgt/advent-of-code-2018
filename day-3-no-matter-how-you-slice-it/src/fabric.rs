@@ -1,6 +1,6 @@
 use std::collections::HashSet;
 
-use claim::Claim;
+use crate::claim::Claim;
 
 #[derive(Clone, PartialEq)]
 pub enum Unit {

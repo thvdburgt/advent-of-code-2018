@@ -1,8 +1,8 @@
 mod claim;
 mod fabric;
 
-use claim::Claim;
-use fabric::{Fabric, Unit};
+use crate::claim::Claim;
+use crate::fabric::{Fabric, Unit};
 
 use std::collections::HashSet;
 

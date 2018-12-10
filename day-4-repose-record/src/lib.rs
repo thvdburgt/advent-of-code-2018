@@ -1,8 +1,9 @@
 mod datetime;
 mod record;
 
-use record::*;
 use std::collections::HashMap;
+
+use crate::record::*;
 
 fn create_sleep_record(input: &str) -> HashMap<u32, [u32; 64]> {
     let mut records: Vec<Record> = input.lines().map(|line| line.parse().unwrap()).collect();
