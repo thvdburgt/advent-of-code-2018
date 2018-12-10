@@ -1,0 +1,9 @@
+[package]
+name = "advent-of-code-2018-day-10"
+version = "0.1.0"
+authors = ["Thomas van der Burgt <thomas@thvdburgt.nl>"]
+edition = "2018"
+
+[dependencies]
+regex = "1"
+lazy_static = "1"
