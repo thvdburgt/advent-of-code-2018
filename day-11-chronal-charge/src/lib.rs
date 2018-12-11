@@ -13,5 +13,5 @@ pub fn solve_puzzle_part_2(size: usize, serial: i32) -> String {
     let grid = FuelCellGrid::new(size, serial);
 
     let (size, (x, y)) = grid.best_square();
-    format!("{},{},{}", x, y, size)
+    format!("{},{},{}", x + 1, y + 1, size)
 }
