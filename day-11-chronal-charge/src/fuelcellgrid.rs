@@ -13,7 +13,7 @@ impl FuelCellGrid {
             let mut row_sum: i32 = 0;
             let mut row = Vec::with_capacity(size);
             for x in 1..=size {
-                let power = Self::calculate_power(x, y, serial);
+                let power = Self::calc_power_lvl(x, y, serial);
                 let mut summed_area = power + row_sum;
                 if let Some(prev_row) = grid.last() {
                     summed_area += prev_row[x - 1]
@@ -30,14 +30,13 @@ impl FuelCellGrid {
         Self { size, grid }
     }
 
-    fn calculate_power(x: usize, y: usize, serial: i32) -> i32 {
+    fn calc_power_lvl(x: usize, y: usize, serial: i32) -> i32 {
         let rack_id = x as i32 + 10;
 
         let mut power_level = rack_id * y as i32;
         power_level += serial;
         power_level *= rack_id;
-        power_level %= 1000;
-        power_level /= 100;
+        power_level = (power_level % 1000) / 100;
         power_level - 5
     }
 
@@ -96,8 +95,8 @@ impl FuelCellGrid {
 
 #[test]
 fn power_level_examples() {
-    assert_eq!(FuelCellGrid::calculate_power(3, 5, 8), 4);
-    assert_eq!(FuelCellGrid::calculate_power(122, 79, 57), -5);
-    assert_eq!(FuelCellGrid::calculate_power(217, 196, 39), 0);
-    assert_eq!(FuelCellGrid::calculate_power(101, 153, 71), 4);
+    assert_eq!(FuelCellGrid::calc_power_lvl(3, 5, 8), 4);
+    assert_eq!(FuelCellGrid::calc_power_lvl(122, 79, 57), -5);
+    assert_eq!(FuelCellGrid::calc_power_lvl(217, 196, 39), 0);
+    assert_eq!(FuelCellGrid::calc_power_lvl(101, 153, 71), 4);
 }
